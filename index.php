@@ -10,7 +10,7 @@
 					<div class="col-md-6 banner-grid">
 						<h3>Unlimited Web Hosting</h3>
 						<p>this hero area to show off some of your nice work. You can even have a video inside it since it’s great as a secondary call to action alongside this button underneath this text.</p>
-						<a href="single.html" class="button">get started</a>
+						<a href="single.php" class="button">get started</a>
 					</div>
 					<div class="clearfix"></div>
 				</div>
@@ -93,7 +93,7 @@
 				</div>
 			<!---brilliantly--->
 			<!---team--->
-				<div class="team">
+				<!--<div class="team">
 					<h3>our team is one of the best</h3>
 					<h5>Professionals that are always on top of their game</h5>
 					<div class="team-grids">
@@ -195,7 +195,7 @@
 						
 					</div>
 				</div>
-				<!---team--->
+				team--->
 				<!---prices--->
 					<div class="price-section">
 						<div class="container">
