@@ -10,9 +10,7 @@
  * @license  https://opensource.org/licenses/MIT MIT License
  * @link     http://localhost/
  */
-
-
-require 'class.php';
+require '../admin/class.php';
  
 $error  = array();
 $message = '';
@@ -28,13 +26,10 @@ if (isset($_POST['submit'])) {
     $error[] = array('input'=>'password', 'msg'=>$msg);
 
 }  
-if (isset($_POST["rememberme"])) {
-    $hour = time() + 3600 * 24 * 30;
-    setcookie('username', $_POST['name'], $hour);
+
+if (isset($_SESSION['userdata'])) {
+     //header('Location:http://localhost/cedHosting/user/index.php');
 }
-// if (isset($_SESSION['userdata'])) {
-//     header('Location:index.php');
-// }
 require 'header.php';
 ?>
 <!---login--->
@@ -45,8 +40,13 @@ require 'header.php';
                         <div class="account_grid">
                             <div class="col-md-6 login-left">
                                 <h3>new customers</h3>
-                                <p>By creating an account with our store, you will be able to move through the checkout process faster, store multiple shipping addresses, view and track your orders in your account and more.</p>
-                                <a class="acount-btn" href="account.php">Create an Account</a>
+                                <p>By creating an account with our store,
+                                you will be able to move through the checkout 
+                                process faster, store multiple shipping addresses,
+                                view and track your orders in your
+                                account and more.</p>
+                                <a class="acount-btn" href="account.php">
+                                Create an Account</a>
                             </div>
                             <div class="col-md-6 login-right">
                                 <h3>registered</h3>
@@ -72,7 +72,7 @@ require 'header.php';
                                     <?php //endif;?>
                                 </div>-->
                                 </form>
-                             </div>	
+                            </div>	
                             <div class="clearfix"></div>
                         </div>
                     </div>

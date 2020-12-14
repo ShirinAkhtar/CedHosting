@@ -1,197 +1,187 @@
-<?php include('header.php'); ?>
-<?php include('sidebar.php'); ?>
-
-<?php
-/**
- * Template File Doc Comment
- * 
- * PHP version 7
- *
- * @category Template_Class
- * @package  Template_Class
- * @author   Author <author@domain.com>
- * @license  https://opensource.org/licenses/MIT MIT License
- * @link     http://localhost/
- */
-include('config.php');
-    $error  = array();
-    $message = '';
-
+<?php 
+require "class.php";
+require 'header.php';
+$error  = array();
+$message = '';
+$Product = new Product();
 if (isset($_POST['submit'])) {
-        $name = isset($_POST['name'])?$_POST['name']:'';
-        $numPro = isset($_POST['numPro'])?$_POST['numPro']:'';
-	
-		
-
-
-    if (empty($_POST['name']) || empty($_POST['numPro'])) {
-        $error[] = array('input'=>'username', 'msg'=>'Please Fill Out all the fields! ');
-	}
-	
-	if (sizeof($error)==0) {
-        $sql = 'INSERT INTO category (`name`, `numPro`) 
-        VALUES("'.$name.'" , "'.$numPro.'")';
-   
-        if ($conn->query($sql) === true) {
-             echo "New record created successfully";
-        } else {
-            $error[] = array('input'=>'form','msg'=>$conn->error);
-            echo "Error: " . $sql . "<br>" . $conn->error;
-        }
-		
-		
-    }
+    //$category = isset($_POST['category'])?$_POST['category']:'';
+    $Subcategory = isset($_POST['Subcategory'])?$_POST['Subcategory']:'';
+    $link = isset($_POST['link'])?$_POST['link']:'';
+    $msg = $Product->addProduct($Subcategory, $link);
+    
 }
-	?>	
-		
-		<div id="main-content"> <!-- Main Content Section with everything -->
-			
-			<noscript> <!-- Show a notification if the user has disabled javascript -->
-				<div class="notification error png_bg">
-					<div>
-						Javascript is disabled or is not supported by your browser. Please <a href="http://browsehappy.com/" title="Upgrade to a better browser">upgrade</a> your browser or <a href="http://www.google.com/support/bin/answer.py?answer=23852" title="Enable Javascript in your browser">enable</a> Javascript to navigate the interface properly.
-					</div>
-				</div>
-			</noscript>
-			
-			<!-- Page Head -->
-			<h2>Welcome John</h2>
-			<p id="page-intro">What would you like to do?</p>
-			
-			
-			
-			<div class="clear"></div> <!-- End .clear -->
-			
-			<div class="content-box"><!-- Start Content Box -->
-				
-				<div class="content-box-header">
-					
-					<h3>Content box</h3>
-					
-					<ul class="content-box-tabs">
-						<li><a href="#tab1" class="default-tab">Manage</a></li> <!-- href must be unique and match the id of target div -->
-						<li><a href="#tab2">Add</a></li>
-					</ul>
-					
-					<div class="clear"></div>
-					
-				</div> <!-- End .content-box-header -->
-				
-				<div class="content-box-content">
-					
-					<div class="tab-content default-tab" id="tab1"> <!-- This is the target div. id must match the href of this div's tab -->
-						
-					<?php  
-                        $sql = 'SELECT * FROM category';
-                        $result = $conn->query($sql);
-                        if ($result->num_rows > 0) {
-                    ?>	
-						
-						<table>
-							
-							<thead>
-								<tr>
-								   
-								   <th>Category Id</th>
-								   <th>Category Name</th>
-								   <th>Number of Product</th>
-								   <th>Action</th>
-								</tr>
-								
-							</thead>
-					
-							<?php
-				while ($row = $result->fetch_assoc()) {
-                    
-        ?>  
-							<tbody>
-								<tr>
-									
-									<td><?php echo $row["id"]; ?></td>
-									<td><?php echo $row["name"]; ?></td>
-									<td><?php echo $row["numPro"]; ?></td>
-									<td>
-										<!-- Icons -->
-										 <a href="edit1.php?id='<?php echo $row["id"];?>'" title="Edit"><img src="resources/images/icons/pencil.png" alt="Edit" /></a>
-										 <a href="delete1.php?id='<?php echo $row["id"];?>'" title="Delete"><img src="resources/images/icons/cross.png" alt="Delete" /></a> 
-										 <a href="edit1.php?id='<?php echo $row["id"];?>'" title="Edit Meta"><img src="resources/images/icons/hammer_screwdriver.png" alt="Edit Meta" /></a>
-									</td>
-								</tr>
-							</tbody>
-							<?php  
-                }    
-        }$conn->close();?> 
-						</table>
-						
-					</div> <!-- End #tab1 -->
-					
-					<div class="tab-content" id="tab2">
-					
-					<form id="category Form" action = "category.php" method = "POST">
-							
-							<fieldset> <!-- Set class to "column-left" or "column-right" on fieldsets to divide the form into columns -->
-								
-							<p>
-									<label>Category</label>
-										<input class="text-input small-input" type="text" id="small-input" name="name" /> 
-										<br /><small>Please Enter Your Category</small>
-								</p>
-								
-								<p>
-									<label> Number of Products  Under this category</label>
-                                    <input class="text-input small-input datepicker" type="text" id="small-input" name="numPro" />
-                                    <br /><small>Please Enter Your Product under this category</small>
-								</p>
-									<input class="button" type="submit" name="submit" value="Submit" />
-								</p>
-								
-							</fieldset>
-							
-							<div class="clear"></div><!-- End .clear -->
-							
-						</form>
-						
-					</div> <!-- End #tab2 -->        
-					
-				</div> <!-- End .content-box-content -->
-				
-			</div> <!-- End .content-box -->
-			
-			
-				
-			</div> <!-- End .content-box -->
-			<div class="clear"></div>
-			
-			
-			<!-- Start Notifications -->
-			<!--
-			<div class="notification attention png_bg">
-				<a href="#" class="close"><img src="resources/images/icons/cross_grey_small.png" title="Close this notification" alt="close" /></a>
-				<div>
-					Attention notification. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin vulputate, sapien quis fermentum luctus, libero. 
-				</div>
-			</div>
-			
-			<div class="notification information png_bg">
-				<a href="#" class="close"><img src="resources/images/icons/cross_grey_small.png" title="Close this notification" alt="close" /></a>
-				<div>
-					Information notification. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin vulputate, sapien quis fermentum luctus, libero.
-				</div>
-			</div>
-			
-			<div class="notification success png_bg">
-				<a href="#" class="close"><img src="resources/images/icons/cross_grey_small.png" title="Close this notification" alt="close" /></a>
-				<div>
-					Success notification. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin vulputate, sapien quis fermentum luctus, libero.
-				</div>
-			</div>
-			
-			<div class="notification error png_bg">
-				<a href="#" class="close"><img src="resources/images/icons/cross_grey_small.png" title="Close this notification" alt="close" /></a>
-				<div>
-					Error notification. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin vulputate, sapien quis fermentum luctus, libero.
-				</div>
-			</div>-->
-			
-			<!-- End Notifications --><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-<?php include('footer.php') ?>
+
+if (isset($_POST['delete'])) {
+    $id = $_POST['id'];
+    $Product->deleteCategory($id);
+    echo "<script>window.location.href='category.php'</script>";
+}
+
+if (isset($_POST['update'])) {
+    $id = $_POST['id'];
+    $prod_name = isset($_POST['prod_name'])?$_POST['prod_name']:'';
+    $link = isset($_POST['link'])?$_POST['link']:'';
+    $prod_available = isset($_POST['prod_available'])?$_POST['prod_available']:'';
+    $Product->UpdateCategory($id, $prod_name, $link, $prod_available);
+}
+$store = $Product ->displayProduct();
+?>
+<!-- Main content -->
+
+<div class="header bg-primary pb-6">
+      <div class="container-fluid">
+        <div class="header-body">
+          <div class="row align-items-center py-4">
+            <div class="col-lg-6 col-7">
+              <h6 class="h2 text-white d-inline-block mb-0">Default</h6>
+              <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
+                <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+                  <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i></a></li>
+                  <li class="breadcrumb-item"><a href="#">Dashboards</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">Default</li>
+                </ol>
+              </nav>
+            </div>
+            <div class="col-lg-6 col-5 text-right">
+              <a href="#" class="btn btn-sm btn-neutral">New</a>
+              <a href="#" class="btn btn-sm btn-neutral">Filters</a>
+            </div>
+          </div>
+          <!-- Card stats -->
+          
+        </div>
+      </div>
+    </div>
+<!-- Main content -->
+<!-- <div class="main-content" id="panel">
+    <div class="container-fluid d-flex align-items-center">
+        <div class="row">
+            <div class="col-lg-7 col-md-10">
+                <h1 class="display-2 text-dark">
+                    View Product
+                </h1>
+                <p class="text-white mt-0 mb-5">
+                    This is your profile page. 
+                    You can see the progress you've made with
+                    your work and manage your projects or assigned tasks
+                </p>
+            </div>
+        </div>
+    </div> -->
+    <div class="container-fluid mt--6">
+    <div class="col-xl-12">
+        <div class="card">
+            <div class="card-header border-0">
+                <div class="row align-items-center">
+                    <div class="col">
+                        <h3 class="mb-0">Products</h3>
+                    </div>
+                    <div class="col text-right">
+                        <a href="#!" class="btn btn-sm btn-primary">See all</a>
+                    </div>
+                </div>
+            </div>
+<div class="table-responsive">
+    <table class="table align-items-center" id="myTable">
+        <thead>
+            <tr>
+                <th scope="col" class="sort" data-sort="name">Category Id</th>
+                <th scope="col" class="sort" data-sort="budget">Category Parent Id</th>
+                <th scope="col" class="sort" data-sort="status">Category Name</th>
+                <th scope="col" class="sort" data-sort="completion">Link</th>
+                <th scope="col" class="sort" data-sort="completion">Category Status</th>
+                <th scope="col" class="sort" data-sort="completion">Category Launch Date</th>
+                <th scope="col" class="sort" data-sort="completion">Action</th>
+            </tr>
+        </thead>
+        <tbody class="list">
+        <?php 
+            foreach ($store as $key=> $value) { 
+                if ($value['prod_parent_id'] == 1) {?>
+            
+            <tr>
+                <th scope="row">
+                    <div class="media align-items-center">
+                        <div class="media-body">
+                            <span class="name mb-0 text-sm"><?php echo $value['id'] ?></span>
+                        </div>
+                    </div>
+                </th>
+                <td class="budget">
+                <?php echo $value['prod_parent_id'] ?>
+                </td>
+                <form method = "post">
+                <?php if (isset($_POST['edit']) && $_POST['id'] == $value['id'] ) {?>
+                    <td>
+                    <input type="text" name="prod_name" value="<?php echo $value['prod_name'] ?>"/>
+                    </td>
+                <?php } else {?>
+                <td>
+                    <span class="badge badge-dot mr-4">
+                      <i class="bg-warning"></i>
+                      <span class="status"><?php echo $value['prod_name'] ?></span>
+                    </span>
+                </td>
+                <?php } ?>
+                <?php if (isset($_POST['edit']) && $_POST['id'] == $value['id'] ) {?>
+                    <td>
+                    <input type="text" name="link" value="<?php echo $value['link'] ?>"/>
+                </td> 
+                <?php } else {?>
+                <td>
+                
+                    <span class="badge badge-dot mr-4">
+                      <i class="bg-warning"></i>
+                      <span class="status"><?php echo $value['html'] ?></span>
+                    </span>
+                </td>
+                <?php } ?>
+                <?php if (!(isset($_POST['edit']) && $_POST['id'] == $value['id']) ) {?>
+                <td>
+                    <?php if ($value['prod_available'] == 1) { ?>
+                    Yes
+                    <?php } else {?>
+                    No 
+                    <?php } ?> 
+                </td>
+                <?php } else {?>
+                <td>
+                <select id="msg2" name="prod_available" required>
+                    <option selected >Select</option>
+                    <option value="1">Yes</option>
+                    <option value="0">No</option>
+                </select> 
+                </td>
+                <?php } ?>
+                <td>
+                    <span class="badge badge-dot mr-4">
+                      <i class="bg-warning"></i>
+                      <span class="status"><?php echo $value['prod_launch_date'] ?></span>
+                    </span>
+                </td>
+                <td>
+                    <form method = "post">
+                       <input type="hidden" name="id" value="<?php echo $value['id']; ?>">
+                       <?php if (isset($_POST['edit']) && $_POST['id'] == $value['id'] ) { ?>
+                       <button type="submit" name="update" class="btn btn-primary">Update</button>
+                       <?php } else {?>
+                        <button type="submit"  name="edit" class="btn btn-primary">Edit</button>
+                       <?php } ?>
+                       <button type="submit" onclick="return confirm('Are you Sure want to delete? ')" 
+                       name="delete" class="btn btn-primary">Delete</button>
+                    </form>
+                    </form>
+                </td>
+               
+            </tr>            
+       <?php }
+         }?>
+          </tbody>
+    </table>
+</div>
+
+</div>
+
+    <!-- Footer -->
+    <?php require 'footer.php';?>

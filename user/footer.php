@@ -85,12 +85,13 @@
 							</div>
 							<div class="col-md-3 footer-grid">
 								<h4>get in touch</h4>
-								<p>8901 Marmora Road</p>
-								<p>Glasgow, DO4 89GR.</p>
-								<p>Telephone : +1 234 567 890</p>
-								<p>Telephone : +1 234 567 890</p>
-								<p>FAX : + 1 234 567 890</p>
-								<p>E-mail : <a href="mailto:example@mail.com"> example@mail.com</a></p>
+								<p>3/460,</p>
+								<p>Opp to Nehru Enclave,</p>
+								<p>Vishwas Khand, </p>
+								<p>Lucknow,</p>
+								<p>Uttar Pradesh 226010</p>
+								<p>0522 407 7802</p>
+								<p>E-mail : <a href="https://cedcoss.com/"> cedcoss.com</a></p>
 							</div>
 							<div class="clearfix"></div>
 						</div>

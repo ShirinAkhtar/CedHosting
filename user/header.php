@@ -1,11 +1,16 @@
 <?php
-require_once 'class.php';
-//session_start();
+require_once '../admin/class.php';
 $url = $_SERVER['REQUEST_URI'];
 $path = parse_url($url, PHP_URL_PATH);
 $filename = basename($path);
 $service_menu = array('linuxhosting.php', 'wordpresshosting.php', 'windowshosting.php', 'cmshosting.php' ) ;
+
+
+$Product = new Product();
+$store = $Product ->displayProduct();
+//print_r($store);
 ?>
+
 <!DOCTYPE HTML>
 <html>
     <head>
@@ -96,18 +101,22 @@ $service_menu = array('linuxhosting.php', 'wordpresshosting.php', 'windowshostin
 								<li <?php if($filename == ' services.php ' ) : ?>class="active"<?php endif; ?>><a href="services.php">Services</a></li>
 								<li class="dropdown <?php if( in_array ($filename, $service_menu ) ) : ?>active<?php endif; ?> ">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Hosting<i class="caret"></i></a>
-                                    <ul class="dropdown-menu">
-                                        <li <?php if($filename == ' linuxhosting.php ' ) : ?>class="active"<?php endif; ?> ><a href="linuxhosting.php">Linux hosting</a></li>
-                                        <li <?php if($filename == ' wordpresshosting.php ' ) : ?>class="active"<?php endif; ?> ><a href="wordpresshosting.php">WordPress Hosting</a></li>
-                                        <li <?php if($filename == ' windowshosting.php ' ) : ?>class="active"<?php endif; ?> ><a href="windowshosting.php">Windows Hosting</a></li>
-                                        <li <?php if($filename == ' cmshosting.php ' ) : ?>class="active"<?php endif; ?> ><a href="cmshosting.php">CMS Hosting</a></li>      
-                                    </ul>			
+                                <ul class="dropdown-menu">
+                                <?php 
+                                  foreach($store as $key=> $value) { 
+                                        if ($value['prod_parent_id'] == 1 ) { 
+                                            if ($value['prod_available'] == 1 ) { ?>
+                                    <li>
+                                    <a href="<?php echo $value['html']; ?>"> <?php echo $value['prod_name']; ?> </a>
+                                   </li>
+                                    <?php } ?><?php } ?>
+                                <?php } ?> </ul>			
                                 </li>
                                 <li <?php if($filename == ' pricing.php ' ) : ?>class="active"<?php endif; ?> ><a href="pricing.php">Pricing</a></li>
                                 <li <?php if($filename == ' blog.php ' ) : ?>class="active"<?php endif; ?>><a href="blog.php">Blog</a></li>
                                 <li <?php if($filename == ' contact.php ' ) : ?>class="active"<?php endif; ?>><a href="contact.php">Contact</a></li>
                                 <li><a href="cart.php"><i class="glyphicon
-                                 glyphicon-shopping-cart"></i></a></li>
+                                 glyphicon-shopping-cart"></i>Cart</a></li>
 								<?php if (isset($_SESSION['userdata'])) {
                                 ?><li>
                                 <a href="logout.php">

@@ -10,7 +10,7 @@
  * @license  https://opensource.org/licenses/MIT MIT License
  * @link     http://localhost/
  */
-require 'class.php';
+require_once '../admin/class.php';
 require 'header.php';
 $error  = array();
 $Registration = new Registration();
@@ -32,64 +32,66 @@ if (isset($_POST['submit'])) {
     } else {
         $msg= $Registration->reg($email, $name, $mobile, $sign_up_date, $password, $security_question, $security_answer);
         $error[] = array('input'=>'password', 'msg'=>$msg);
+        echo "<script>window.location.href='http://localhost/cedHosting/user/ver.php'</script>";
     }
 }
 ?>
 <!---header--->
 <!---login--->
 <div class="content">
-	<!-- registration -->
-	<div class="main-1">
-		<div class="container">
-			<div class="register">
+    <!-- registration -->
+    <div class="main-1">
+        <div class="container">
+            <div class="register">
+            
             <form id="form" action = "account.php" method = "POST">
-				 <div class="register-top-grid">
-					<h3>personal information</h3>
-					 <div>
-						<span>Email<label>*</label></span>
-						<input type="text"  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" size="30" name="email"  required> 
-					 </div>
-					 <div>
-						<span>Name<label>*</label></span>
-						<input type="text" name="name"  pattern="^[a-zA-Z]+( [a-zA-Z]+)*$" required> 
-					 </div>                     
+                 <div class="register-top-grid">
+                    <h3>personal information</h3>
                      <div>
-						 <span>Security Questions<label>*</label></span>
+                        <span>Email<label>*</label></span>
+                        <input type="text"  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" size="30" name="email"  required> 
+                     </div>
+                     <div>
+                        <span>Name<label>*</label></span>
+                        <input type="text" name="name"  pattern="^[a-zA-Z]+( [a-zA-Z]+)*$" required> 
+                     </div>                     
+                     <div>
+                         <span>Security Questions<label>*</label></span>
                          <select id="msg2" required>
                             <option selected >Security Questions</option>
                             <option value="0">What was your childhood nickname? </option>
                             <option value="1">What is the name of your favorite childhood friend? </option>
                             <option value="2">What is the middle name ?</option>
                             <option value="3">What was the last name of your third grade teacher?</option>
-						</select> 
+                        </select> 
                      </div>
                      <div>
                          <span>Security Answer<label>*</label></span>
-						 <input type="text" pattern="^[a-zA-Z]+( [a-zA-Z]+)*$" name="security_answer" required> 
+                         <input type="text" pattern="^[a-zA-Z]+( [a-zA-Z]+)*$" name="security_answer" required> 
                      </div>
                      <div>
-						 <span>Mobile<label>*</label></span>
-						 <input type="text" name="mobile" minlength="10" maxlength="11" pattern="^(|[0]){0,1}([7-9]{1})([0-9]{9})$" required> 
+                         <span>Mobile<label>*</label></span>
+                         <input type="text" name="mobile" minlength="10" maxlength="11" pattern="^(|[0]){0,1}([7-9]{1})([0-9]{9})$" required> 
                      </div>
-					 <div class="clearfix"></div>
-					   <a class="news-letter" href="#">
-						 <label class="checkbox"><input type="checkbox" name="checkbox" checked=""><i> </i>Sign Up for Newsletter</label>
-					   </a>
-					 </div>
-				     <div class="register-bottom-grid">
+                     <div class="clearfix"></div>
+                       <a class="news-letter" href="#">
+                         <label class="checkbox"><input type="checkbox" name="checkbox" checked="">Sign Up for Newsletter</label>
+                       </a>
+                     </div>
+                     <div class="register-bottom-grid">
                         <h3>login information</h3>
                         <div>
                             <span>Password<label>*</label></span>
-                            <input type="password" minlength="8" maxlength="16" name="password" required/>
+                            <input type="password" id="pass" minlength="8" maxlength="16" name="password" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,10}$" required/>
                         </div>
                         <div>
                             <span>Confirm Password<label>*</label></span>
-                            <input type="password" minlength="8" maxlength="16" name="rpassword" required/>
+                            <input type="password" minlength="8" maxlength="16" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,10}$" name="rpassword" required/>
                         </div>
-					 </div>
-				<div class="clearfix"></div>
-				<div class="register-but">
-					   <input type="submit" name="submit" value="submit">
+                     </div>
+                <div class="clearfix"></div>
+                <div class="register-but">
+                       <input type="submit" name="submit" value="submit">
                        <div class="clearfix"> </div>
                        <div id = "error">
                             <?php if (sizeof($error)>0 ) : ?>
@@ -100,14 +102,13 @@ if (isset($_POST['submit'])) {
                                 </ul>
                             <?php endif;?>
                         </div>
-				   </form>
-				</div>
-		   </div>
-		 </div>
-	</div>
+                   </form>
+                   
+                </div>
+           </div>
+         </div>
+    </div>
 <!-- registration -->
 </div>
-<!-- login -->
 <!---footer--->
 <?php require 'footer.php' ?>
-<!---footer--->

@@ -57,7 +57,7 @@ class Registration extends Databases
            return "Users name already exists";
         } else {
             //$paswd = md5($pswd);
-            $sql = $this-> conn-> query ( " INSERT INTO tbl_user(`email`,`name`, `mobile`, `sign_up_date`, `password`,`security_question`,`security_answer`)
+            $sql = $this-> conn-> query(" INSERT INTO tbl_user(`email`,`name`, `mobile`, `sign_up_date`, `password`,`security_question`,`security_answer`)
             VALUES('$email', '$name', '$mobile', NOW(), '$paswd', '$security_question', '$security_answer') " ) ;
 
             $robo = 'shirinakhtar1998@gmail.com';
@@ -93,7 +93,7 @@ class Registration extends Databases
             
                 $mailer->isHTML(true);
                 $mailer->Subject = 'PHPMailer Test';
-                $mailer->Body = 'This is a "http://localhost/cedHosting/verify.php?email=' . md5( $email ) . '"';
+                $mailer->Body = 'This is a "http://localhost/cedHosting/ver.php?id=' . $id . '"';
             
                 $mailer->send();
                 $mailer->ClearAllRecipients();
@@ -130,8 +130,62 @@ class Registration extends Databases
                 ); 
                 
             } 
-            return true;
+           header('Location: ver.php');
         }
         //} 
+    }
+}
+
+class Product extends Databases
+{
+    public function addProduct($Subcategory, $link)
+    {
+         
+        $sql = " INSERT INTO tbl_product(`prod_name`, `link`, `prod_launch_date`)
+        VALUES('$Subcategory', '$link', NOW() ) ";
+        $result1 = $this->conn->query($sql);
+
+        $sql1 = "SELECT * FROM tbl_product";
+
+        $result = $this->conn->query($sql1);
+        if ($result->num_rows > 0) {
+
+            while ($row = $result->fetch_assoc()) {
+                $_SESSION['product'] = array(
+                'pro_id' => $row['id'],
+                'prod_parent_id' => $row['prod_parent_id'],
+                'prod_name' => $row['prod_name'],
+                'link' => $row['link'],
+                'prod_available' => $row['prod_available'],
+                'prod_launch_date' => $row['prod_launch_date']
+                ); 
+                
+            } 
+           
+        }
+    }
+
+    public function displayProduct() 
+    {
+        $store = array();
+        $sql1 = "SELECT * FROM tbl_product";
+        $result = $this->conn->query($sql1);
+        if ($result->num_rows > 0) {
+
+            while ($row = $result->fetch_assoc()) {
+                $_SESSION['product'] = array(
+                'pro_id' => $row['id'],
+                'prod_parent_id' => $row['prod_parent_id'],
+                'prod_name' => $row['prod_name'],
+                'link' => $row['link'],
+                'prod_available' => $row['prod_available'],
+                'prod_launch_date' => $row['prod_launch_date']
+                ); 
+                array_push($store, $row);
+                
+            } 
+           
+        } 
+        return $store;
     }
 }
