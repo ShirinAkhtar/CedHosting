@@ -15,7 +15,7 @@ session_start();
 
 require "../user/vendor/autoload.php";
 $siteurl = "http://localhost/cedHosting/";
-define( 'dbhost', 'localhost');
+define('dbhost', 'localhost');
 define( 'dbuser', 'root');
 define( 'dbpass', "");
 define( 'dbname', 'CedHosting');
@@ -61,7 +61,7 @@ class Registration extends Databases
 
         } else {
             //$paswd = md5($pswd);
-            $sql = $this-> conn-> query ( " INSERT INTO tbl_user(`email`,`name`, `mobile`, `sign_up_date`, `password`,`security_question`,`security_answer`)
+            $sql = $this->conn->query(" INSERT INTO tbl_user(`email`,`name`, `mobile`, `sign_up_date`, `password`,`security_question`,`security_answer`)
             VALUES('$email', '$name', '$mobile', NOW(), '$paswd', '$security_question', '$security_answer') " ) ;
 
             return "Registration Successful";
@@ -94,10 +94,7 @@ class Registration extends Databases
                     header('Location: http://localhost/cedHosting/user/index.php');
                 }
             } 
-            
         }
-         
-       
     }
 
     public function activate_acc($email)
@@ -141,7 +138,7 @@ class Registration extends Databases
             
                 $mailer->isHTML(true);
                 $mailer->Subject = 'PHPMailer Test';
-                $mailer->Body = 'Hey <a href="http://localhost/cedHosting/verification.php?id=' . $id . '">Click here to verify';
+                $mailer->Body = 'Hey <a href="http://localhost/cedHosting/user/verification.php?id=' . $id .'">Click here to verify';
             
                 $mailer->send();
                 $mailer->ClearAllRecipients();
@@ -171,6 +168,8 @@ class Registration extends Databases
     {
         $sql = "UPDATE `tbl_user` SET `email_approved`='1',`active`='1' WHERE `id` = '$id'";
         $result = $this->conn->query($sql);
+        echo "<script>alert('Your Account has been verified!')</script>";
+        header('refresh:0, url = http://localhost/cedHosting/user/index.php');
     }
 
 }

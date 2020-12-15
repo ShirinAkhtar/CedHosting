@@ -1,62 +1,52 @@
 <?php
-   // session_start();
-   
-    
-    require_once '../admin/class.php';
-    include "header.php";
-    $error= array();
-    $msg="";
-        if(isset($_POST['submit'])){
-            $_SESSION['mobile']=$_POST['number'];
-            $number= $_POST['number'];
-           
-            $otp = rand(100000, 999999);
-            $_SESSION['session_otp'] = $otp;
-            $message = rawurlencode("Your One Time Password is ".$otp);
-            $fields = array(
-                "sender_id" => "FSTSMS",
-                "message" => ".$message.",
-                "language" => "english",
-                "route" => "p",
-                "numbers" => "$number",
-                "flash" => "1"
-            );
-
-            $curl = curl_init();
-
-            curl_setopt_array($curl, array(
-            CURLOPT_URL => "https://www.fast2sms.com/dev/bulk",
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING => "",
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 30,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => "POST",
-            CURLOPT_POSTFIELDS => json_encode($fields),
-            CURLOPT_HTTPHEADER => array(
-                "authorization: VKdQDbOHF75X2lAgvfBYWrcapnI1J9N4PmkthUTyEGjozC0Le6VYQxGmf4ZwoRPKy6gnTaFtNH8IqDJO",
-                "accept: */*",
-                "cache-control: no-cache",
-                "content-type: application/json"
-            ),
-            ));
-
-            $response = curl_exec($curl);
-            $err = curl_error($curl);
-
-            curl_close($curl);
-
-            if ($err) {
-           
-            } else {
-            
-            } 
+require_once '../admin/class.php';
+include "header.php";
+$error= array();
+$msg="";
+    if (isset($_POST['submit'])) {
+        $_SESSION['mobile']=$_POST['number'];
+        $number= $_POST['number'];
         
-    }
-    if(isset($_POST['verify'])){
-        $number= $_POST['otp'];
-        if($_SESSION['session_otp']==$number){
+        $otp = rand(100000, 999999);
+        $_SESSION['session_otp'] = $otp;
+        $message = rawurlencode("Your One Time Password is ".$otp);
+        $fields = array(
+            "sender_id" => "FSTSMS",
+            "message" => ".$message.",
+            "language" => "english",
+            "route" => "p",
+            "numbers" => "$number",
+            "flash" => "1"
+        );
+        $curl = curl_init();
+
+        curl_setopt_array ( $curl, array(
+        CURLOPT_URL => "https://www.fast2sms.com/dev/bulk",
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_ENCODING => "",
+        CURLOPT_MAXREDIRS => 10,
+        CURLOPT_TIMEOUT => 30,
+        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        CURLOPT_CUSTOMREQUEST => "POST",
+        CURLOPT_POSTFIELDS => json_encode($fields),
+        CURLOPT_HTTPHEADER => array(
+            "authorization: VKdQDbOHF75X2lAgvfBYWrcapnI1J9N4PmkthUTyEGjozC0Le6VYQxGmf4ZwoRPKy6gnTaFtNH8IqDJO",
+            "accept: */*",
+            "cache-control: no-cache",
+            "content-type: application/json"
+        ), ) );
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+        curl_close($curl);
+if ($err) {
            
+} else {
+            
+}
+}
+    if(isset($_POST['verify'])) {
+        $number= $_POST['otp'];
+        if ($_SESSION['session_otp']==$number) {
             header('Location:signup.php');
         }
         else{
@@ -94,15 +84,19 @@
                 <button type="submit" name="submit" id="sign-up" class="btn btn-primary btn-ghost">Send OTP</button>
                 <div id="val" class="pt-3 cyan-text"><?php echo "<b>".$msg."</b>" ?></div>
                 <a>OR<a>
-                <a class="btn btn-primary btn-ghost" href="index.php">Back To Main Page</a>
+                <a class="btn btn-primary btn-ghost" 
+                href="index.php">Back To Main Page</a>
             </form>
-            <?php if(isset($_POST['submit'])){?>
+            <?php if (isset($_POST['submit'])) {?>
             <form action="mobile.php" method="POST" class="login-form1" >
                 <h1><sign-up>Enter OTP HERE</sign-up></h1>
                 <div class="form-input-material">
-                        <input type="number" name="otp" id="mobile" maxlength = "10" minlength = "10" placeholder="OTP" autocomplete="off"  />
+                    <input type="number" name="otp" id="mobile" 
+                    maxlength = "10" minlength = "10" 
+                    placeholder="OTP" autocomplete="off"  />
                 </div>
-                <button type="submit" name="verify" id="sign-up" class="btn btn-primary btn-ghost">Enter OTP</button>
+                <button type="submit" name="verify" id="sign-up" 
+                class="btn btn-primary btn-ghost">Enter OTP</button>
             </form> 
             <?php } ?>   
        </div>

@@ -69,19 +69,56 @@ $store = $Product ->displayProduct();
             </div>
         </div>
     </div> -->
-    <div class="container-fluid mt--6">
+  
+
+<div class="container-fluid mt--6">
     <div class="col-xl-12">
         <div class="card">
             <div class="card-header border-0">
                 <div class="row align-items-center">
                     <div class="col">
-                        <h3 class="mb-0">Products</h3>
+                    <h3 class="mb-0">Add Category</h3>
                     </div>
                     <div class="col text-right">
-                        <a href="#!" class="btn btn-sm btn-primary">See all</a>
+                    <a href="#!" class="btn btn-sm btn-primary">See all</a>
                     </div>
+                    <div></div>
                 </div>
             </div>
+            <form action="" method="post">
+                <div class="p-4 bg-secondary">
+                    <label>
+                    Category:
+                    </label>
+                    <div class="input-group mb-2">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text"><i class="ni ni-lock-circle-open text-primary"></i></div>
+                    </div>
+                    <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Username" value="Hosting" disabled>
+                    </div>
+                </div>
+                <div class="p-4 bg-secondary">
+                    <label>
+                    Sub-Category:
+                    </label>
+                    <input type="text" id="bandwidth" class="form-control form-control-alternative" onblur="errors(this.id)"
+                    name="Subcategory" placeholder="Sub Category">
+                    <div id="bandwidthError"></div>
+                </div>
+                <div class="p-4 bg-secondary">
+                    <label>
+                    link:
+                    </label>
+                    <input type="text" class="form-control form-control-alternative" name="link" placeholder="href">
+                </div>
+                <div class="p-4 bg-secondary">
+                    <input type="submit" name="submit" value="Submit" class="btn btn-primary">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 <div class="table-responsive">
     <table class="table align-items-center" id="myTable">
         <thead>
@@ -170,7 +207,7 @@ $store = $Product ->displayProduct();
                        <?php } ?>
                        <button type="submit" onclick="return confirm('Are you Sure want to delete? ')" 
                        name="delete" class="btn btn-primary">Delete</button>
-                    </form>
+                   
                     </form>
                 </td>
                
@@ -185,3 +222,5 @@ $store = $Product ->displayProduct();
 
     <!-- Footer -->
     <?php require 'footer.php';?>
+
+    

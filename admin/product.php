@@ -5,7 +5,7 @@ $error  = array();
 $message = '';
 $Product = new Product();
 if (isset($_POST['submit'])) {
-    //print_r($_POST);
+    
     $feature = array();
     $category = isset($_POST['category'])?$_POST['category']:'';
     $Subcategory = isset($_POST['Subcategory'])?$_POST['Subcategory']:'';
@@ -41,7 +41,8 @@ $store1 = $Product ->displayProduct_description();
               <h6 class="h2 text-white d-inline-block mb-0">Default</h6>
               <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
                 <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
-                  <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i></a></li>
+                  <li class="breadcrumb-item">
+                  <a href="#"><i class="fas fa-home"></i></a></li>
                   <li class="breadcrumb-item"><a href="#">Dashboards</a></li>
                   <li class="breadcrumb-item active" aria-current="page">Default</li>
                 </ol>
@@ -143,13 +144,11 @@ $store1 = $Product ->displayProduct_description();
                         <div class="form-group">
                             <label class="form-control-label">Page URL</label>
                             <input type="text" id="url" 
-                            class="form-control" name= "link" onblur="errors(this.id)"
+                            class="form-control" name= "link" 
                             placeholder="Sub Category">
-                            <div id="urlError"></div>
+                           
                         </div>
                     </div>
-                   
-                
             </div>
         </div>
     </div>
@@ -181,17 +180,19 @@ $store1 = $Product ->displayProduct_description();
                                 <div class="form-group">
                                     <label class="form-control-label" 
                                     for="input-username">Enter Monthly Prices</label>
-                                    <input type="text" id="username" name = "month" 
-                                    class="form-control" maxlength="15" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                                    <input type="text" id="month" name = "month" 
+                                    class="form-control" maxlength="15" onblur="errors(this.id)"
+                                    oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
                                     placeholder= "This would be Monthly Plan " required>
-                                    <div id="usernameError"></div>
+                                    <div id="monthError"></div>
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label class="form-control-label"
                                     for="input-email">Enter Annual Prices</label>
-                                    <input type="text" id="annual" maxlength="15" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"  onblur="errors(this.id)"
+                                    <input type="text" id="annual" maxlength="15" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" 
+                                    onblur="errors(this.id)"
                                     class="form-control" name = "annual" 
                                     placeholder="This would be Annual Price " required>
                                     <div id="annualError"></div>
@@ -226,9 +227,10 @@ $store1 = $Product ->displayProduct_description();
                         <div class="form-group">
                             <label class="form-control-label">
                             Bandwidth (in GB)</label>
-                            <input type="text" id="input-email" onblur="errors(this.id)"
+                            <input type="text" id="bandwidth" onblur="errors(this.id)"
                             class="form-control" name= "bandwidth" 
                             placeholder="Enter 0.5 for 512 MB " required>
+                            <div id="bandwidthError"></div>
                         </div>
                     </div>
                     <div class="pl-lg-4">
@@ -277,21 +279,3 @@ $store1 = $Product ->displayProduct_description();
 
     <?php require 'footer.php';?>
 
-<script>
-function errors(id) {
-    var input = document.getElementById(id);
-    var inputValue = input.value;
-    if (inputValue == '') {
-        input.classList.add('div-error');
-        var error = id+"Error";
-        document.getElementById(error).innerHTML = '<div class="form-error-message"><i class="fa fa-exclamation-circle"></i> This field is required.</div>';
-        document.getElementById("submit").setAttribute("disabled", "true");
-    }
-    else {
-        var error = id+"Error";
-        document.getElementById(error).innerHTML= '';
-        input.classList.remove('div-error'); 
-        document.getElementById("submit").removeAttribute("disabled");
-    }
-} 
- </script>  

@@ -44,6 +44,25 @@
       $('#myTable').DataTable();
     } );
   </script>
+
+<script>
+function errors(id) {
+    var input = document.getElementById(id);
+    var inputValue = input.value;
+    if (inputValue == '') {
+        input.classList.add('div-error');
+        var error = id+"Error";
+        document.getElementById(error).innerHTML = '<div class="form-error-message"><i class="fa fa-exclamation-circle"></i> This field is required.</div>';
+        document.getElementById("submit").setAttribute("disabled", "true");
+    }
+    else {
+        var error = id+"Error";
+        document.getElementById(error).innerHTML= '';
+        input.classList.remove('div-error'); 
+        document.getElementById("submit").removeAttribute("disabled");
+    }
+} 
+ </script>  
 </body>
 
 </html>

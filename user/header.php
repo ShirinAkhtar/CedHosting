@@ -47,12 +47,12 @@ $store = $Product ->displayProduct();
         type="text/css" media="screen">
         <!--lightboxfiles-->
         <script type="text/javascript">
-        $(function() {
-        $('.team a').Chocolat();
-        });
-        </script>	
+            $(function() {
+            $('.team a').Chocolat();
+            });
+        </script>
 
-        <script type="text/javascript" src="js/jquery.hoverdir.js"></script>	
+        <script type="text/javascript" src="js/jquery.hoverdir.js"></script>
         <script type="text/javascript">
         $(function() {
             $(' #da-thumbs > li ').each( function() { $(this).hoverdir(); } );
@@ -65,7 +65,7 @@ $store = $Product ->displayProduct();
         jQuery(function($) {
             $(".swipebox").swipebox();
         });
-        </script>	
+        </script>
         <?php } ?>
         <!--script-->
     </head>
@@ -84,7 +84,7 @@ $store = $Product ->displayProduct();
                                 <i class="icon-bar"></i>
                                 <i class="icon-bar"></i>
                                 <i class="icon-bar"></i>
-                            </button>				  
+                            </button>
                             <div class="navbar-brand">
                                 <h1><a href="index.php"><img src="logo2.png" 
                                 alt="cedhosting" width="120px" 
@@ -96,37 +96,43 @@ $store = $Product ->displayProduct();
                         <div class="collapse navbar-collapse" 
                         id="bs-example-navbar-collapse-1">
                             <ul class="nav navbar-nav">
-                                <li <?php if($filename == ' index.php ' ) : ?>class="active"<?php endif; ?> ><a href="index.php">Home <i class="sr-only">(current)</i></a></li>
+                                <li <?php if($filename == ' index.php ' ) : ?>class="active"<?php endif; ?>><a href="index.php">Home <i class="sr-only">(current)</i></a></li>
                                 <li <?php if($filename == ' about.php ' ) : ?>class="active"<?php endif; ?>><a href="about.php">About</a></li>
-								<li <?php if($filename == ' services.php ' ) : ?>class="active"<?php endif; ?>><a href="services.php">Services</a></li>
-								<li class="dropdown <?php if( in_array ($filename, $service_menu ) ) : ?>active<?php endif; ?> ">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Hosting<i class="caret"></i></a>
+                                <li <?php if($filename == ' services.php ' ) : ?>class="active"<?php endif; ?>><a href="services.php">Services</a></li>
+                                <li class="dropdown <?php if (in_array ( $filename, $service_menu ) ) : ?>active<?php endif; ?> ">
+                                <a href="#" class="dropdown-toggle" 
+                                data-toggle="dropdown" role="button" 
+                                aria-haspopup="true" aria-expanded="false">
+                                Hosting<i class="caret"></i></a>
                                 <ul class="dropdown-menu">
                                 <?php 
-                                  foreach($store as $key=> $value) { 
-                                        if ($value['prod_parent_id'] == 1 ) { 
-                                            if ($value['prod_available'] == 1 ) { ?>
+                                foreach ($store as $key=> $value) { 
+                                    if ($value['prod_parent_id'] == 1 ) { 
+                                        if ($value['prod_available'] == 1 ) { ?>
                                     <li>
-                                    <a href="<?php echo $value['html']; ?>"> <?php echo $value['prod_name']; ?> </a>
+                                    <a href="http://localhost/cedHosting/user/catpage.php?id=<?php echo $value['id']; ?>"> <?php echo $value['prod_name']; ?> </a>
                                    </li>
-                                    <?php } ?><?php } ?>
-                                <?php } ?> </ul>			
+                                        <?php } ?>
+                                    <?php } ?>
+                                <?php } ?>
+                                </ul>
                                 </li>
                                 <li <?php if($filename == ' pricing.php ' ) : ?>class="active"<?php endif; ?> ><a href="pricing.php">Pricing</a></li>
-                                <li <?php if($filename == ' blog.php ' ) : ?>class="active"<?php endif; ?>><a href="blog.php">Blog</a></li>
+                                <li <?php if($filename == ' blog.php ' ) : ?>class="active"<?php endif; ?> ><a href="blog.php">Blog</a></li>
                                 <li <?php if($filename == ' contact.php ' ) : ?>class="active"<?php endif; ?>><a href="contact.php">Contact</a></li>
                                 <li><a href="cart.php"><i class="glyphicon
                                  glyphicon-shopping-cart"></i>Cart</a></li>
-								<?php if (isset($_SESSION['userdata'])) {
+                                <?php if (isset($_SESSION['userdata'])) {
                                 ?><li>
                                 <a href="logout.php">
                                     <button type="button" class="btn btn-primary" 
                                     id="rcorners2">Logout</button>
                                 </a></li>
-                            <?php } else { ?>
-                                <li <?php if($filename == ' login.php ' ) : ?> class="active" <?php endif; ?> ><a href="login.php">Login</a></li>
+                                <?php } else { ?>
+                                <li <?php if($filename == ' login.php ' ) : ?> 
+                                class="active" <?php endif; ?> ><a href="login.php">Login</a></li>
                             </ul>
-							<?php } ?>      
+                                <?php } ?>      
                         </div><!-- /.navbar-collapse -->
                     </div><!-- /.container-fluid -->
                 </nav>

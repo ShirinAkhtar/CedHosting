@@ -18,13 +18,11 @@ $Registration = new Registration();
 if (isset($_POST['submit'])) {
     $email = isset($_POST['email'])?$_POST['email']:'';
     $password = isset($_POST['password'])?$_POST['password']:'';
-        
     $msg = $Registration->regLogin($email, $password);
     if ($msg) {
         header('refresh:0 url= index.php');
     }
     $error[] = array('input'=>'password', 'msg'=>$msg);
-
 }  
 
 if (isset($_SESSION['userdata'])) {
@@ -66,13 +64,12 @@ require 'header.php';
                                     <?php //if (sizeof($error)>0 ) : ?>
                                         <ul>
                                             <?php //foreach($error as $error1): ?>
-                                                <li><?php //echo $error1['msg']; ?></li>
-                                            <?php// endforeach; ?>
+                                          <li><?php //echo $error1['msg']; ?></li>
                                         </ul>
                                     <?php //endif;?>
                                 </div>-->
                                 </form>
-                            </div>	
+                                </div>
                             <div class="clearfix"></div>
                         </div>
                     </div>
