@@ -3,7 +3,9 @@ require 'header.php';
 $Product = new Product();
 $store = $Product ->displayProduct();
 $store1 = $Product ->displayProduct_description();
-?>                <div class="content">
+session_destroy();
+?>
+<div class="content">
     <div class="linux-section">
         <div class="container">
             <div class="linux-grids">
@@ -78,7 +80,7 @@ $store1 = $Product ->displayProduct_description();
                                     </li>
                                         </ul>
                                 </div>
-                                <a href="#">buy now</a>
+                                <a href="http://localhost/cedHosting/user/cart.php?id=<?php echo $value['prod_id']; ?>">buy now</a>
                                 </div>
                             <?php } ?> 
                         <?php } ?>

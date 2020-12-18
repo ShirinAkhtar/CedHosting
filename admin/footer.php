@@ -26,12 +26,8 @@
       </footer>
     </div>
   </div>
-  <!-- Argon Scripts -->
-  <!-- Core -->
-  <script src="assets/vendor/jquery/dist/jquery.min.js"></script>
-  <script src="assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/vendor/js-cookie/js.cookie.js"></script>
-  <script src="assets/vendor/jquery.scrollbar/jquery.scrollbar.min.js"></script>
+  <!-- Argon Scripts --></script>  
+ <script>r/jquery.scrollbar/jquery.scrollbar.min.js"></script>
   <script src="assets/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js"></script>
   <!-- Optional JS -->
   <script src="assets/vendor/chart.js/dist/Chart.min.js"></script>
@@ -62,7 +58,16 @@ function errors(id) {
         document.getElementById("submit").removeAttribute("disabled");
     }
 } 
- </script>  
+ 
+    tinymce.init({
+      selector: 'textarea',
+      plugins: 'a11ychecker advcode casechange formatpainter linkchecker autolink lists checklist media mediaembed pageembed permanentpen powerpaste table advtable tinycomments tinymcespellchecker',
+      toolbar: 'a11ycheck addcomment showcomments casechange checklist code formatpainter pageembed permanentpen table',
+      toolbar_mode: 'floating',
+      tinycomments_mode: 'embedded',
+      tinycomments_author: 'Author name',
+   });
+  </script>
 </body>
 
 </html>

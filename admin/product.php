@@ -132,7 +132,8 @@ $store1 = $Product ->displayProduct_description();
                                     <label class="form-control-label" 
                                     for="input-email">Enter Product Name</label>
                                     <input type="text" id="name" 
-                                    pattern="^[a-zA-Z]+( [a-zA-Z]+)*$" onblur="errors(this.id)"
+                                    pattern="^[a-zA-Z]+( [a-zA-Z]+)*$"
+                                    onblur="errors(this.id)"
                                     class="form-control" name= "Subcategory"
                                     placeholder="Sub Category" required>
                                     <div id="nameError"></div>
@@ -143,9 +144,9 @@ $store1 = $Product ->displayProduct_description();
                     <div class="pl-lg-4">
                         <div class="form-group">
                             <label class="form-control-label">Page URL</label>
-                            <input type="text" id="url" 
+                            <textarea  id="url" 
                             class="form-control" name= "link" 
-                            placeholder="Sub Category">
+                            placeholder="Sub Category"></textarea>
                            
                         </div>
                     </div>
@@ -181,9 +182,11 @@ $store1 = $Product ->displayProduct_description();
                                     <label class="form-control-label" 
                                     for="input-username">Enter Monthly Prices</label>
                                     <input type="text" id="month" name = "month" 
-                                    class="form-control" maxlength="15" onblur="errors(this.id)"
+                                    class="form-control" maxlength="15" 
+                                    onblur="errors(this.id)"
                                     oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-                                    placeholder= "This would be Monthly Plan " required>
+                                    placeholder= "This would be Monthly Plan " 
+                                    required>
                                     <div id="monthError"></div>
                                 </div>
                             </div>
@@ -191,7 +194,8 @@ $store1 = $Product ->displayProduct_description();
                                 <div class="form-group">
                                     <label class="form-control-label"
                                     for="input-email">Enter Annual Prices</label>
-                                    <input type="text" id="annual" maxlength="15" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" 
+                                    <input type="text" id="annual" maxlength="15"
+                                    oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" 
                                     onblur="errors(this.id)"
                                     class="form-control" name = "annual" 
                                     placeholder="This would be Annual Price " required>

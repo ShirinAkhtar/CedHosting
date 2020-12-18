@@ -241,6 +241,7 @@ class Product extends Databases
         
         $result1 = $this->conn->query($sql1);
         
+        
     }
 
     public function deleteCategory($id) 
@@ -270,22 +271,11 @@ class Product extends Databases
         $sql = "SELECT * FROM `tbl_product_description` INNER JOIN `tbl_product` ON tbl_product_description.prod_id = tbl_product.id WHERE NOT `prod_parent_id` = 0";
         $result = $this->conn->query($sql);
         if ($result->num_rows > 0) {
-
             while ($row = $result->fetch_assoc()) {
-              /*  $_SESSION['product'] = array(
-                'pro_id' => $row['id'],
-                'prod_parent_id' => $row['prod_parent_id'],
-                'prod_name' => $row['prod_name'],
-                'link' => $row['link'],
-                'prod_available' => $row['prod_available'],
-                'prod_launch_date' => $row['prod_launch_date']
-                ); */
                 array_push($store, $row);
-                
             } 
-           
         } 
-        return $store;
+            return $store;
     }
     public function displayProduct_Parent($id)
     {

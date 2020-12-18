@@ -165,7 +165,7 @@ class Product extends Databases
         }
     }
 
-    public function displayProduct() 
+    public static function displayProduct() 
     {
         $store = array();
         $sql1 = "SELECT * FROM tbl_product";

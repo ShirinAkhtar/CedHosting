@@ -1,5 +1,6 @@
 <?php 
-require_once 'class.php'; ?>
+require_once 'class.php';
+?>
 <!--
 =========================================================
 * Argon Dashboard - v1.2.0
@@ -36,6 +37,7 @@ require_once 'class.php'; ?>
   <!-- Page plugins -->
   <!-- Argon CSS -->
   <link rel="stylesheet" href="assets/css/argon.css?v=1.2.0" type="text/css">
+  <script src="https://cdn.tiny.cloud/1/f1vs52arh2j6rnr8vbm4u7m1kmjiq4x427bl491pisj54qmh/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
 </head>
 
 <body>
